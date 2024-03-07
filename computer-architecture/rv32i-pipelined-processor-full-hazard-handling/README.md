@@ -28,26 +28,3 @@ add x4, x1, x3
 - El desarrollo del proyecto se evaluará mediante el uso de un repositorio de GitHub. Para ello, asegúrese de registrar continuamente su desarrollo mediante suficientes *commits*.
 
 
-### Advertencia
-Aún cuando existen implementaciones disponibles que ya materializan, en una u otra medida, lo que aquí se les solicita, está prohibido utilizar completamente diseños existentes y disponibles en algún repositorio, aún cuando este se encuentre abierto y el licenciamiento de que posea permita su utilización. Como se indica anteriormente, utilice el material de referencia presente en la bibliografía obligatoria del curso.
-
-
-## Evaluación
-Este proyecto se evaluará con la siguiente rúbrica:
-
-
-| Rubro | % | C | EP | D | NP |
-|-------|---|---|----|---|----|
-|Implementación del procesador | 50|   |    |   |    |
-|Evaluación con programas - desarrollados | 20|   |    |   |    |
-|Evaluación con programa - para revisión | 20|   |    |   |    |
-|Uso de repositorio|10|   |    |   |    |
-
-C: Completo,
-EP: En progreso ($\times 0,8$),
-D: Deficiente ($\times 0,5$),
-NP: No presenta ($\times 0$)
-
-## Importante
-- El uso del repositorio implica que existan contribuciones de **todos** los miembros del equipo.
-- La revisión de la implementación del procesador se realizará, de forma asincrónica remota, el lunes 28 de agosto, de 7:30 am a 10:30 am. Un enlace de Zoom será provisto oportunamente para la revisión.
