@@ -5,16 +5,20 @@
 
 <br/><br/>
 
-### Preámbulo
-En este proyecto, usted implementará un predictor de saltos dinámico para su procesador RISC-V, escalar, en _pileline_, y de ejecución en orden, desarrollado en el proyecto 1. Su predictor de saltos deberá implementarse empleando un _Branch Target Buffer_ (BTB) para almacenar direcciones de salto calculadas así como determinar si se trata, a partir del _Program Counter_ (PC), de una instrucción de salto. Además deberá incluir un predictor de dirección basado en un contador de 2 bits.
+### Descripción del Proyecto
 
+Implementé un predictor de saltos dinámico para un procesador RISC-V escalar, en *pipeline* y de ejecución en orden, desarrollado previamente. El diseño incluye:
 
-### Requisitos
-Considere las siguientes características para el diseño e incorporación del predictor de saltos dinámico en su procesador:
+- Un *Branch Target Buffer* (BTB) para almacenar direcciones de salto calculadas y determinar si una instrucción es un salto a partir del *Program Counter* (PC).  
+- Un predictor de dirección basado en un contador de 2 bits, que se actualiza de acuerdo con la máquina de estados correspondiente.  
+- La capacidad de activar o desactivar la predicción de saltos, así como la detección y corrección de riesgos de datos mediante *forwarding*. En caso de desactivar estas técnicas, el procesador introduce *stalls* o realiza *flush* para garantizar la correcta ejecución.  
 
-- Deberá realizar la implementación del predictor de saltos dinámico empleado SystemVerilog.
-- El procesador deberá contar con la posibilidad de activar o desactivar la predicción de saltos antes de la ejecución de un programa. De igual manera, deberá permitir activar o desactivar la detección de riesgos de datos y su corrección mediante _forwarding_. En caso de que ninguna técnica de mitigación de riesgos de datos y/o control se active, su procesador deberá introducir _stalls_ o realizar _flush_ de manera apropiada para permitir la correcta ejecución.
-- El cálculo de la direccion de salto se realiza en la etapa de _Execute_ del procesador. 
-- En la etapa de _Instruction Fetch_, al mismo tiempo que se toma el valor del PC para acceder a la memoria de programa y extraer la instrucción, el valor del PC se emplea para acceder la BTB y extraer la dirección de salto (_target address_) en caso de que ya dicha dirección se haya calculado y almacenado en la BTB. Si el acceso a la BTB resulta en un _miss_ y se trata de una instrucción de salto, lo cual se conoce hasta la etapa de _Instruction Decode_, la dirección de salto que se calcula en la etapa de _Execute_ se almacena de forma correspondiente en la BTB.
-- En la etapa de _Execute_, además de calcular la dirección de salto, se confirma si el salto se toma o no. Esta información es importante para actualizar el contador de 2 bits de acuerdo con la máquina de estados vista en clase. Si, por ejemplo, la predicción estableció que el salto se tomaba pero en la etapa de _Execute_ se determinó que el salto no debía tomarse, el procesador deberá realizar un _flush_ del _pipeline_ para las instrucciones anteriores al salto y deberá cargar en PC el valor correcto de la dirección de la instrucción que se deberá ejecutar.
-- Desarrolle 1 programa de prueba, a nivel de lenguaje ensamblador, suficientemente complejo, y con sentido algorítmico (no solamente un poco de instrucciones juntas) con el que pueda evaluar los siguientes 4 casos: a) ejecución sin _forwarding_ ni predicción de saltos, b) ejecución con _forwarding_ pero sin predicción de saltos, c) ejecución con predicción de saltos pero sin _forwarding_, y d) ejecución con _forwarding_ y predicción de saltos activos. Reporte los resultados de instrucciones ejecutadas, ciclos de reloj y CPI para cada uno de estos escenarios de ejecución. Esto último lo puede automatizar en el _testbench_.
+El cálculo de direcciones de salto se realiza en la etapa de *Execute*, y las direcciones se almacenan en el BTB si no estaban previamente registradas. Si la predicción resulta incorrecta, el procesador realiza un *flush* del *pipeline* y actualiza el PC con la dirección correcta.  
+
+Desarrollé un programa de prueba en ensamblador para evaluar diferentes configuraciones de ejecución:  
+1. Sin *forwarding* ni predicción de saltos.  
+2. Con *forwarding* pero sin predicción de saltos.  
+3. Con predicción de saltos pero sin *forwarding*.  
+4. Con *forwarding* y predicción de saltos activos.  
+
+Automaticé la medición de resultados como instrucciones ejecutadas, ciclos de reloj y CPI en el *testbench* para cada escenario.  
